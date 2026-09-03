@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشويات أبو أشرف - المنيو التفاعلي</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: #121212; color: #f5f5f5; padding: 10px; }
+        .container { max-width: 480px; margin: 0 auto; background: #1a1a1a; border: 2px solid #d4af37; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2); }
+        .header { background: linear-gradient(135deg, #2b1111, #111); text-align: center; padding: 20px 15px; border-bottom: 2px solid #d4af37; }
+        .header h1 { color: #d4af37; font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+        .header p { color: #e0a96d; font-size: 14px; }
+        .section-title { background: linear-gradient(90deg, #8b0000, #400000); color: #d4af37; padding: 10px 15px; font-size: 16px; font-weight: bold; margin-top: 15px; border-right: 5px solid #d4af37; }
+        .section-subtitle { font-size: 12px; color: #bbb; padding: 8px 15px 0 15px; font-style: italic; }
+        .items-list { padding: 10px 15px; }
+        .item-card { background: #242424; border: 1px solid #333; border-radius: 8px; padding: 12px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .item-name { color: #d4af37; font-size: 15px; font-weight: bold; border-bottom: 1px solid #333; padding-bottom: 4px; }
+        .weight-row { display: flex; justify-content: space-between; align-items: center; background: #1f1f1f; padding: 6px 10px; border-radius: 6px; margin-top: 4px; border: 1px solid #2c2c2c; }
+        .weight-label { color: #e0a96d; font-size: 13px; font-weight: 600; }
+        .item-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px solid #333; padding-top: 8px; }
+        .qty-box { display: flex; align-items: center; gap: 10px; }
+        .qty-btn { background: #8b0000; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn:active { transform: scale(0.85); background: #a80000; }
+        .qty-val { font-size: 15px; font-weight: bold; color: #fff; min-width: 22px; text-align: center; }
+        .cart-footer { background: #1f1f1f; border-top: 2px solid #d4af37; padding: 15px; text-align: center; position: sticky; bottom: 0; z-index: 100; }
+        .whatsapp-btn { background: #25d366; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .whatsapp-btn:hover { background: #20ba5a; }
+        .footer-banner { background: #261111; border: 1px solid #8b0000; padding: 12px; margin: 15px; border-radius: 8px; text-align: center; font-size: 13px; color: #ddd; }
+        .footer-banner p { margin: 5px 0; }
+        .highlight { color: #d4af37; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>مشويات أبو أشرف</h1>
+        <p>ملوك المشوي في تاج الدول</p>
+    </div>
+
+    <!-- قسم ع السريع -->
+    <div class="section-title">قسم ع السريع (الوجبات الفردية والسناك)</div>
+    <div class="section-subtitle">جميع الوجبات تقدم مع الأرز البسمتي وطحينة أبو أشرف</div>
+    <div class="items-list">
+        <div class="item-card"><div class="item-name">سناك كباب</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كباب', -1)">-</button><span class="qty-val" id="qty-سناك كباب">0</span><button class="qty-btn" onclick="updateQty('سناك كباب', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك كفته كندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كفته كندوز', -1)">-</button><span class="qty-val" id="qty-سناك كفته كندوز">0</span><button class="qty-btn" onclick="updateQty('سناك كفته كندوز', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك طرب كندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك طرب كندوز', -1)">-</button><span class="qty-val" id="qty-سناك طرب كندوز">0</span><button class="qty-btn" onclick="updateQty('سناك طرب كندوز', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك كفته ضاني</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كفته ضاني', -1)">-</button><span class="qty-val" id="qty-سناك كفته ضاني">0</span><button class="qty-btn" onclick="updateQty('سناك كفته ضاني', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك طرب ضاني</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك طرب ضاني', -1)">-</button><span class="qty-val" id="qty-سناك طرب ضاني">0</span><button class="qty-btn" onclick="updateQty('سناك طرب ضاني', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك سجق</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك سجق', -1)">-</button><span class="qty-val" id="qty-سناك سجق">0</span><button class="qty-btn" onclick="updateQty('سناك سجق', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك كبد وقوانص</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كبد وقوانص', -1)">-</button><span class="qty-val" id="qty-سناك كبد وقوانص">0</span><button class="qty-btn" onclick="updateQty('سناك كبد وقوانص', 1)">+</button></div></div></div>
+    </div>
+
+    <!-- قسم جمر وكبرياء -->
+    <div class="section-title">قسم جَمْر وكِبرياء (الأوزان المتدرجة)</div>
+    <div class="section-subtitle">تشمل: الأرز + السلطة + الطحينة (من ¼ كيلو فأكثر)</div>
+    <div class="items-list">
+        <!-- كباب ضاني صافي -->
+        <div class="item-card">
+            <div class="item-name">كباب ضاني صافي</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-كباب ضاني صافي (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-كباب ضاني صافي (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-كباب ضاني صافي (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-كباب ضاني صافي (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('كباب ضاني صافي (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- كفته كندوز بلدي -->
+        <div class="item-card">
+            <div class="item-name">كفته كندوز بلدي</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-كفته كندوز بلدي (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-كفته كندوز بلدي (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-كفته كندوز بلدي (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-كفته كندوز بلدي (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('كفته كندوز بلدي (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- طرب كندوز -->
+        <div class="item-card">
+            <div class="item-name">طرب كندوز</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب كندوز (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-طرب كندوز (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('طرب كندوز (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب كندوز (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-طرب كندوز (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('طرب كندوز (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب كندوز (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-طرب كندوز (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('طرب كندوز (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب كندوز (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-طرب كندوز (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('طرب كندوز (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- كفته ضاني أصلية -->
+        <div class="item-card">
+            <div class="item-name">كفته ضاني أصلية</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-كفته ضاني أصلية (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-كفته ضاني أصلية (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-كفته ضاني أصلية (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-كفته ضاني أصلية (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('كفته ضاني أصلية (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- طرب ضاني دسم -->
+        <div class="item-card">
+            <div class="item-name">طرب ضاني دسم</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-طرب ضاني دسم (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-طرب ضاني دسم (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-طرب ضاني دسم (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-طرب ضاني دسم (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('طرب ضاني دسم (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- سجق بلدي شرقي -->
+        <div class="item-card">
+            <div class="item-name">سجق بلدي شرقي</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-سجق بلدي شرقي (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-سجق بلدي شرقي (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-سجق بلدي شرقي (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-سجق بلدي شرقي (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('سجق بلدي شرقي (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+
+        <!-- كبد وقوانص مشوية -->
+        <div class="item-card">
+            <div class="item-name">كبد وقوانص مشوية</div>
+            <div class="weight-row"><span class="weight-label">¼ ك (تصبيرة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (¼ ك تصبيرة)', -1)">-</button><span class="qty-val" id="qty-كبد وقوانص مشوية (¼ ك تصبيرة)">0</span><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (¼ ك تصبيرة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">½ ك (ترويقة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (½ ك ترويقة)', -1)">-</button><span class="qty-val" id="qty-كبد وقوانص مشوية (½ ك ترويقة)">0</span><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (½ ك ترويقة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">¾ ك (اللمة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (¾ ك اللمة)', -1)">-</button><span class="qty-val" id="qty-كبد وقوانص مشوية (¾ ك اللمة)">0</span><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (¾ ك اللمة)', 1)">+</button></div></div>
+            <div class="weight-row"><span class="weight-label">1 ك (العيلة)</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (1 ك العيلة)', -1)">-</button><span class="qty-val" id="qty-كبد وقوانص مشوية (1 ك العيلة)">0</span><button class="qty-btn" onclick="updateQty('كبد وقوانص مشوية (1 ك العيلة)', 1)">+</button></div></div>
+        </div>
+    </div>
+
+    <!-- قسم لمة العيلة -->
+    <div class="section-title">قسم لِمة العيلة (الصواني والعزومات الكبرى)</div>
+    <div class="items-list">
+        <div class="item-card"><div class="item-name">صينية العيلة</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية العيلة', -1)">-</button><span class="qty-val" id="qty-صينية العيلة">0</span><button class="qty-btn" onclick="updateQty('صينية العيلة', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">صينية اللحمة</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية اللحمة', -1)">-</button><span class="qty-val" id="qty-صينية اللحمة">0</span><button class="qty-btn" onclick="updateQty('صينية اللحمة', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">صينية الصحاب</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية الصحاب', -1)">-</button><span class="qty-val" id="qty-صينية الصحاب">0</span><button class="qty-btn" onclick="updateQty('صينية الصحاب', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">صينية التوفير</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية التوفير', -1)">-</button><span class="qty-val" id="qty-صينية التوفير">0</span><button class="qty-btn" onclick="updateQty('صينية التوفير', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">صينية أبو أشرف</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية أبو أشرف', -1)">-</button><span class="qty-val" id="qty-صينية أبو أشرف">0</span><button class="qty-btn" onclick="updateQty('صينية أبو أشرف', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">صينية العريس</div><div class="item-controls"><span style="font-size:12px; color:#888;">العدد:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('صينية العريس', -1)">-</button><span class="qty-val" id="qty-صينية العريس">0</span><button class="qty-btn" onclick="updateQty('صينية العريس', 1)">+</button></div></div></div>
+    </div>
+
+    <!-- قسم المقبلات والجانبيات -->
+    <div class="section-title">قسم طازة وفريش (المقبلات والجانبيات)</div>
+    <div class="items-list">
+        <div class="item-card"><div class="item-name">سلطة خضراء بلدي فريش</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سلطة خضراء بلدي فريش', -1)">-</button><span class="qty-val" id="qty-سلطة خضراء بلدي فريش">0</span><button class="qty-btn" onclick="updateQty('سلطة خضراء بلدي فريش', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">طحينة أبو أشرف الخاصة</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('طحينة أبو أشرف الخاصة', -1)">-</button><span class="qty-val" id="qty-طحينة أبو أشرف الخاصة">0</span><button class="qty-btn" onclick="updateQty('طحينة أبو أشرف الخاصة', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">عيش بلدي ساخن وطازج</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('عيش بلدي ساخن وطازج', -1)">-</button><span class="qty-val" id="qty-عيش بلدي ساخن وطازج">0</span><button class="qty-btn" onclick="updateQty('عيش بلدي ساخن وطازج', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">شوربة لسان عصفور سخنة</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('شوربة لسان عصفور سخنة', -1)">-</button><span class="qty-val" id="qty-شوربة لسان عصفور سخنة">0</span><button class="qty-btn" onclick="updateQty('شوربة لسان عصفور سخنة', 1)">+</button></div></div></div>
+    </div>
+
+    <!-- الفوتر -->
+    <div class="footer-banner">
+        <p>💼 <span class="highlight">بيتك الثاني في عزومات العمل..</span> خصومات للشركات والمصانع</p>
+        <p>🛵 <span class="highlight">عروض مميزة على التوصيل السريع</span></p>
+        <p style="margin-top: 6px;">📞 للطلبات: <span class="highlight">01156062632</span></p>
+    </div>
+
+    <!-- زر الواتساب -->
+    <div class="cart-footer">
+        <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+            <span>إرسال الطلب عبر الواتساب 🚀</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    const orderData = {};
+
+    function updateQty(itemName, val) {
+        if (!orderData[itemName]) {
+            orderData[itemName] = 0;
+        }
+        orderData[itemName] += val;
+        if (orderData[itemName] < 0) {
+            orderData[itemName] = 0;
+        }
+
+        const el = document.getElementById('qty-' + itemName);
+        if (el) {
+            el.innerText = orderData[itemName];
+        }
+    }
+
+    function sendWhatsAppOrder() {
+        let text = "*[ طلب جديد من منيو مشويات أبو أشرف ]*%0A%0A";
+        let count = 0;
+
+        for (let item in orderData) {
+            if (orderData[item] > 0) {
+                count++;
+                text += `• ${item}: (${orderData[item]})%0A`;
+            }
+        }
+
+        if (count === 0) {
+            alert("من فضلك اختر صنفاً واحداً على الأقل قبل إرسال الطلب.");
+            return;
+        }
+
+        // رسالة إعلانية قصيرة ومختصرة في نهاية الأوردر من غير ما تطول الشكل العام
+        text += "%0A-------------------%0A*مشويات أبو أشرف: طازة.. على الفحم.. وفي السريع! \*";
+        
+        const phone = "201515257457";
+        window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
