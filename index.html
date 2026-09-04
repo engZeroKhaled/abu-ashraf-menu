@@ -51,8 +51,8 @@
     <div class="section-subtitle">جميع الوجبات تقدم مع الأرز البسمتي وطحينة أبو أشرف</div>
     <div class="items-list">
         <div class="item-card"><div class="item-name">سناك كباب</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كباب', -1)">-</button><span class="qty-val" id="qty-سناك كباب">0</span><button class="qty-btn" onclick="updateQty('سناك كباب', 1)">+</button></div></div></div>
-        <div class="item-card"><div class="item-name">سناك كفته کندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كفته کندوز', -1)">-</button><span class="qty-val" id="qty-سناك كفته كندوز">0</span><button class="qty-btn" onclick="updateQty('سناك كفته كندوز', 1)">+</button></div></div></div>
-        <div class="item-card"><div class="item-name">سناك طرب کندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك طرب کندوز', -1)">-</button><span class="qty-val" id="qty-سناك طرب كندوز">0</span><button class="qty-btn" onclick="updateQty('سناك طرب كندوز', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك كفته کندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كفته کندوز', -1)">-</button><span class="qty-val" id="qty-سناك كفته کندوز">0</span><button class="qty-btn" onclick="updateQty('سناك كفته کندوز', 1)">+</button></div></div></div>
+        <div class="item-card"><div class="item-name">سناك طرب کندوز</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك طرب کندوز', -1)">-</button><span class="qty-val" id="qty-سناك طرب کندوز">0</span><button class="qty-btn" onclick="updateQty('سناك طرب کندوز', 1)">+</button></div></div></div>
         <div class="item-card"><div class="item-name">سناك كفته ضاني</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك كفته ضاني', -1)">-</button><span class="qty-val" id="qty-سناك كفته ضاني">0</span><button class="qty-btn" onclick="updateQty('سناك كفته ضاني', 1)">+</button></div></div></div>
         <div class="item-card"><div class="item-name">سناك طرب ضاني</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك طرب ضاني', -1)">-</button><span class="qty-val" id="qty-سناك طرب ضاني">0</span><button class="qty-btn" onclick="updateQty('سناك طرب ضاني', 1)">+</button></div></div></div>
         <div class="item-card"><div class="item-name">سناك سجق</div><div class="item-controls"><span style="font-size:12px; color:#888;">الكمية:</span><div class="qty-box"><button class="qty-btn" onclick="updateQty('سناك سجق', -1)">-</button><span class="qty-val" id="qty-سناك سجق">0</span><button class="qty-btn" onclick="updateQty('سناك سجق', 1)">+</button></div></div></div>
@@ -196,6 +196,49 @@
 <script>
     const orderData = {};
 
+    // أرقام وعناصر بيانات العميل
+    const formFields = ['custName', 'custPhone', 'custStreet', 'deliveryType', 'custTime', 'custPayment'];
+
+    // حفظ بيانات العميل تلقائياً عند التغيير
+    function saveCustomerData() {
+        const formData = {};
+        formFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) formData[id] = el.value;
+        });
+        localStorage.setItem('abu_ashraf_customer_data', JSON.stringify(formData));
+    }
+
+    // استرجاع بيانات العميل عند تحميل الصفحة
+    function loadCustomerData() {
+        const savedData = localStorage.getItem('abu_ashraf_customer_data');
+        if (savedData) {
+            try {
+                const formData = JSON.parse(savedData);
+                formFields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && formData[id] !== undefined) {
+                        el.value = formData[id];
+                    }
+                });
+            } catch (e) {
+                console.error("Error loading saved customer data", e);
+            }
+        }
+    }
+
+    // ربط الأحداث للحفظ عند الكتابة والتغيير
+    window.addEventListener('DOMContentLoaded', () => {
+        loadCustomerData();
+        formFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', saveCustomerData);
+                el.addEventListener('change', saveCustomerData);
+            }
+        });
+    });
+
     function updateQty(itemName, val) {
         if (!orderData[itemName]) orderData[itemName] = 0;
         orderData[itemName] += val;
@@ -232,6 +275,9 @@
             alert("من فضلك أدخل الاسم ورقم الموبايل والعنوان لتأكيد الطلب.");
             return;
         }
+
+        // حفظ البيانات قبل الإرسال للتأكيد
+        saveCustomerData();
 
         // رابط الـ Apps Script الخارجي لإرسال البيانات للشيتس
         const scriptURL = "https://script.google.com/macros/s/AKfycbxsqZZ1oIZGYMaMW4lWjSpEVWFZeog44JOj8zrJVCkFlo0Y8CRM_ExOFJmQwTd88X71HA/exec";
